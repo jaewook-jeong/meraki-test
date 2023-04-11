@@ -2,6 +2,7 @@ import ROUTES from '@constants/ROUTES';
 import MainPage from '@pages/main';
 import ScrapPage from '@pages/scrap';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import './global.css';
 
 function App() {
   return (

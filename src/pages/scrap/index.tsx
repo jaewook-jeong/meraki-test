@@ -1,5 +1,13 @@
+import GNB from '@/GNB';
+import Layout from '@/Layout';
+
 const ScrapPage = () => {
-  return <div>Scrap</div>;
+  return (
+    <Layout>
+      Scrap
+      <GNB />
+    </Layout>
+  );
 };
 
 export default ScrapPage;

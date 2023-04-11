@@ -19,7 +19,8 @@
     "paths": {
       "@pages/*": ["pages/*"],
       "@/*": ["components/*"],
-      "@constants/*": ["constants/*"]
+      "@constants/*": ["constants/*"],
+      "@assets/*": ["assets/*"]
     }
   },
   "include": ["src"],

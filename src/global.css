@@ -1,0 +1,10 @@
+:root {
+  font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif;
+  --gnb-height: 85px;
+}
+
+:root {
+  --black-80: #6D6D6D;
+  --black-100: #000000;
+  --white-100: #FFFFFF;
+}
