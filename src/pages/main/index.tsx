@@ -3,10 +3,10 @@ import Layout from '@/Layout';
 
 const MainPage = () => {
   return (
-    <Layout>
-      Hom
+    <>
+      <Layout>Home</Layout>
       <GNB />
-    </Layout>
+    </>
   );
 };
 

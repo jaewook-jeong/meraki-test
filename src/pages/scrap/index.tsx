@@ -3,10 +3,10 @@ import Layout from '@/Layout';
 
 const ScrapPage = () => {
   return (
-    <Layout>
-      Scrap
+    <>
+      <Layout>Scrap</Layout>
       <GNB />
-    </Layout>
+    </>
   );
 };
 
