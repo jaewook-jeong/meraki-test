@@ -15,7 +15,13 @@ const StyledLink = styled(Link)<{ $active: boolean }>`
     return props.$active ? css`
       color: var(--white-100);
       & > svg {
-        fill: var(--white-100);
+        rect {
+          stroke: var(--white-100);  
+        }
+        path {
+          stroke: var(--white-100);  
+        }
+        
       }
     ` : css`
       color: var(--black-80);
