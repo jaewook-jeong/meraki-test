@@ -2,9 +2,9 @@ import ROUTES from 'constants/ROUTES';
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Nation } from 'types/nation';
 
-type FilterState = {
+export type FilterState = {
   headline: string;
-  pub_date: Date | null;
+  pub_date: string;
   glocations: Nation[];
 };
 
@@ -13,12 +13,12 @@ type PageType = typeof ROUTES[keyof typeof ROUTES];
 const initialState: { [k in PageType]: FilterState } = {
   '/': {
     headline: '',
-    pub_date: null,
+    pub_date: '',
     glocations: [],
   },
   '/scrap': {
     headline: '',
-    pub_date: null,
+    pub_date: '',
     glocations: [],
   }
 };

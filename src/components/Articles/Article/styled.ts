@@ -15,6 +15,7 @@ export const Wrapper = styled.a`
 export const Header = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   column-gap: 11px;
   height: 56px;
 

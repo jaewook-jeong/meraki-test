@@ -1,16 +1,16 @@
 import ReactDatePicker from 'react-datepicker';
 import * as Styled from './styled';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import CustomInput from './CustomInput';
 import { NATIONAL, NATION_LIST } from '@constants/NATIONAL';
 import { RootState, useAppDispatch } from 'store';
 import { setFilter } from 'features/filter/slice';
-import moment from 'moment';
 import { useLocation } from 'react-router-dom';
 import { RouteType } from 'types/routes';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Nation } from 'types/nation';
 import { useSelector } from 'react-redux';
+import { setInitArticlesStore } from 'features/article/slice';
 
 const FilterForm = ({ onClose }: { onClose: () => void }) => {
   const { pathname } = useLocation();
@@ -28,11 +28,12 @@ const FilterForm = ({ onClose }: { onClose: () => void }) => {
         pageType: pathname as RouteType,
         filter: {
           headline: _headLine,
-          pub_date: _pub_date,
+          pub_date: _pub_date ? _pub_date.toISOString() : '',
           glocations: _nations,
         },
       }),
     );
+    dispatch(setInitArticlesStore());
     onClose();
   };
 

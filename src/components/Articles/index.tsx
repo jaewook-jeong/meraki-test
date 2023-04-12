@@ -8,7 +8,7 @@ const Articles = () => {
 
   return (
     <Styled.Wrapper>
-      {articles.length > 0 && articles.map((article) => <Article {...article} />)}
+      {articles.length > 0 && articles.map((article) => <Article key={article.url} {...article} />)}
     </Styled.Wrapper>
   );
 };

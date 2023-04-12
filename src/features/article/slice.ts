@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
+import { FilterState } from 'features/filter/slice';
+import { RootState } from 'store';
 import { Article } from 'types/article';
 
 type RawArticle = {
@@ -29,10 +30,24 @@ const initialState: ArticleState = {
   currentRequestId: '',
 };
 
+const makeLuceneQuery = ({ headline, pub_date, glocations }: FilterState) => {
+  let query = ''
+  if (headline) {
+    query += `headline:("${headline}")`;
+  }
+  if (pub_date) {
+    query += `pub_date:("${pub_date}")`;
+  }
+  if (glocations.length > 0) {
+    query += `glocations:(${glocations.map((g) => `"${g}"`).join(', ')})`;
+  }
+  return query;
+};
 
-async function execute() {
+async function execute(filter: FilterState) {
+  const query = makeLuceneQuery(filter);
   const url =
-    'https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=d5rDty04g2bUzP11iiBiceC7QZ4SoxXw&fq=news_desk:("Sports") AND glocations:("South Korea", "NEW YORK CITY")';
+    `https://api.nytimes.com/svc/search/v2/articlesearch.json?sort=newest&api-key=d5rDty04g2bUzP11iiBiceC7QZ4SoxXw${query ? `&fq=${query}` : ''}`;
   const options = {
     method: 'GET',
     headers: {
@@ -49,10 +64,12 @@ async function execute() {
   }
 }
 
-export const getArticles = createAsyncThunk(
+export const getArticles = createAsyncThunk<any, void, { state: RootState }>(
   'article/get',
-  async () => {
-    const response = await execute();
+  async (_, { getState }) => {
+    const { filter } = getState();
+    
+    const response = await execute(filter['/']);
     return response
   }
 )
@@ -60,7 +77,15 @@ export const getArticles = createAsyncThunk(
 export const articleSlice = createSlice({
   name: 'article',
   initialState,
-  reducers: {},
+  reducers: {
+    setInitArticlesStore: (state) => {
+      state.articles = [];
+      state.currentPage = 0;
+      state.isLoading = false;
+      state.error = null;
+      state.currentRequestId = '';
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(getArticles.pending, (state, action) => {
       if (!state.isLoading) {
@@ -97,6 +122,6 @@ export const articleSlice = createSlice({
   },
 })
 
-export const {  } = articleSlice.actions
+export const { setInitArticlesStore } = articleSlice.actions
 
 export default articleSlice.reducer

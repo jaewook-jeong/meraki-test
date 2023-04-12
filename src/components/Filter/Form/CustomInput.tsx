@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import styled from '@emotion/styled';
 import Icons from '@assets/svg';
 import { text14 } from '@constants/TYPHOGRAP';
@@ -29,13 +29,13 @@ export type Props = {
   onClick?(e: React.MouseEvent<HTMLElement>): void;
 };
 
-const CustomInput = ({ value, onClick, placeholder }: Props) => {
+const CustomInput = forwardRef<HTMLDivElement, Props>(({ value, onClick, placeholder }, ref) => {
   return (
-    <InputWrapper>
+    <InputWrapper ref={ref}>
       <Input readOnly value={value} onClick={onClick} placeholder={placeholder}></Input>
       <Icons.Calendar />
     </InputWrapper>
   );
-};
+});
 
 export default CustomInput;
