@@ -1,0 +1,8 @@
+const MODAL_STATUS = {
+  INIT: 0,
+  APPEARING: 1,
+  APPEARED: 2,
+  DISAPPEARING: 3,
+};
+
+export default MODAL_STATUS;

@@ -7,6 +7,7 @@
   --black-80: #6D6D6D;
   --black-100: #000000;
   --white-100: #FFFFFF;
+  --gray: #C4C4C4;
 }
 
 body {
@@ -37,5 +38,4 @@ body {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  
 }

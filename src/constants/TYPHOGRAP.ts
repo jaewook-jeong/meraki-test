@@ -5,3 +5,9 @@ export const text10SemiBold = css`
   font-size: 10px;
   line-height: 12px;
 `;
+
+export const text14 = css`
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+`;
