@@ -1,31 +1,35 @@
 import ReactDatePicker from 'react-datepicker';
 import * as Styled from './styled';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CustomInput from './CustomInput';
 import { NATIONAL, NATION_LIST } from '@constants/NATIONAL';
-import { useAppDispatch } from 'store';
+import { RootState, useAppDispatch } from 'store';
 import { setFilter } from 'features/filter/slice';
 import moment from 'moment';
 import { useLocation } from 'react-router-dom';
 import { RouteType } from 'types/routes';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Nation } from 'types/nation';
+import { useSelector } from 'react-redux';
 
 const FilterForm = ({ onClose }: { onClose: () => void }) => {
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [headLine, setHeadLine] = useState('');
-  const [nations, setNations] = useState<Nation[]>([]);
-  const dispatch = useAppDispatch();
   const { pathname } = useLocation();
+  const everyFilter = useSelector((state: RootState) => state.filter);
+  const { headline, pub_date, glocations } = everyFilter[pathname as RouteType];
+  const dispatch = useAppDispatch();
+
+  const [_pub_date, setPubDate] = useState<Date | null>(pub_date ? new Date(pub_date) : null);
+  const [_headLine, setHeadLine] = useState(headline);
+  const [_nations, setNations] = useState<Nation[]>(glocations);
 
   const onApply = () => {
     dispatch(
       setFilter({
         pageType: pathname as RouteType,
         filter: {
-          headline: headLine,
-          pub_date: startDate ? moment(startDate).format('YYYYMMDD') : '',
-          glocations: nations,
+          headline: _headLine,
+          pub_date: _pub_date,
+          glocations: _nations,
         },
       }),
     );
@@ -33,10 +37,12 @@ const FilterForm = ({ onClose }: { onClose: () => void }) => {
   };
 
   const toggleLocation = (nation: Nation) => {
-    if (nations.includes(nation)) {
-      setNations(nations.filter((n) => n === nation));
-    } else {
-      setNations([...nations, nation]);
+    if (_nations) {
+      if (_nations.includes(nation)) {
+        setNations(_nations.filter((n) => n === nation));
+      } else {
+        setNations([..._nations, nation]);
+      }
     }
   };
 
@@ -46,7 +52,7 @@ const FilterForm = ({ onClose }: { onClose: () => void }) => {
         <div>헤드라인</div>
         <Styled.Input
           placeholder="검색하실 헤드라인을 입력해주세요."
-          value={headLine}
+          value={_headLine}
           onChange={(e) => setHeadLine(e.target.value)}
         />
       </Styled.InputBox>
@@ -54,8 +60,8 @@ const FilterForm = ({ onClose }: { onClose: () => void }) => {
         <div>날짜</div>
         <ReactDatePicker
           fixedHeight
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
+          selected={_pub_date}
+          onChange={(date) => setPubDate(date)}
           placeholderText="날짜를 선택해주세요."
           customInput={<CustomInput placeholder="날짜를 선택해주세요." />}
         />
@@ -67,7 +73,7 @@ const FilterForm = ({ onClose }: { onClose: () => void }) => {
             <Styled.NationButton
               key={n}
               value={n}
-              $selected={nations.includes(n)}
+              $selected={!!_nations?.includes(n)}
               onClick={() => toggleLocation(n)}
             >
               {NATIONAL[n]}

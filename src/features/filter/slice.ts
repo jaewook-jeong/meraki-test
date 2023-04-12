@@ -3,9 +3,9 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Nation } from 'types/nation';
 
 type FilterState = {
-  headline?: string;
-  pub_date?: string;
-  glocations?: Nation[];
+  headline: string;
+  pub_date: Date | null;
+  glocations: Nation[];
 };
 
 type PageType = typeof ROUTES[keyof typeof ROUTES];
@@ -13,12 +13,12 @@ type PageType = typeof ROUTES[keyof typeof ROUTES];
 const initialState: { [k in PageType]: FilterState } = {
   '/': {
     headline: '',
-    pub_date: '',
+    pub_date: null,
     glocations: [],
   },
   '/scrap': {
     headline: '',
-    pub_date: '',
+    pub_date: null,
     glocations: [],
   }
 };
