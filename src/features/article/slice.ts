@@ -2,6 +2,18 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { Article } from 'types/article';
 
+type RawArticle = {
+  pub_date: string;
+  web_url: string;
+  source: string;
+  headline: {
+    main: string;
+  };
+  byline: {
+    original: string;
+  };
+}
+
 type ArticleState = {
   articles: Article[];
   currentPage: number;
@@ -39,7 +51,7 @@ async function execute() {
 
 export const getArticles = createAsyncThunk(
   'article/get',
-  async (filter) => {
+  async () => {
     const response = await execute();
     return response
   }
@@ -61,8 +73,16 @@ export const articleSlice = createSlice({
       const { requestId } = action.meta;
       if (state.isLoading && state.currentRequestId === requestId) {
         state.isLoading = false;
-        // 일단 임시조치
-        state.articles.push(action.payload as Article);
+
+        const rawArticles = action.payload.response.docs;
+        const newArticles = rawArticles.map((article: RawArticle) => ({
+          headline: article.headline.main,
+          source: article.source,
+          byline: article.byline.original,
+          pub_date: article.pub_date,
+          url: article.web_url,
+        }));
+        state.articles.push(...newArticles);
         state.currentRequestId = '';
       }
     })

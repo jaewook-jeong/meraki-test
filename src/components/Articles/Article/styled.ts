@@ -2,13 +2,14 @@ import { text13, text18SemiBold } from "@constants/TYPHOGRAP";
 import styled from "@emotion/styled";
 import { dynamicLineClamp } from "utils/dynamicLineClamp";
 
-export const Wrapper = styled.article`
+export const Wrapper = styled.a`
   display: flex;
   flex-direction: column;
   padding: 10px 20px;
   row-gap: 8px;
   background-color: var(--white-90);
   border-radius: 8px;
+  text-decoration: none;
 `;
 
 export const Header = styled.div`
@@ -16,6 +17,10 @@ export const Header = styled.div`
   flex-direction: row;
   column-gap: 11px;
   height: 56px;
+
+  & > svg {
+    flex-shrink: 0;
+  }
 `;
 
 export const Title = styled.div`
@@ -33,10 +38,14 @@ export const Footer = styled.div`
 
 export const Person = styled.div`
   display: flex;
+  width: 110px;
   flex-direction: row;
   column-gap: 8px;
   ${text13};
   color: var(--black-100);
+  & > div {
+    ${dynamicLineClamp(1)};
+  }
 `;
 
 export const PublishedAt = styled.div`

@@ -1,19 +1,26 @@
-import * as Styled from './styled';
+import moment from 'moment';
 import Icons from '@assets/svg';
+import { Article as ArticleType } from 'types/article';
+import * as Styled from './styled';
 
-const Article = () => {
+const DAY = ['일', '월', '화', '수', '목', '금', '토'];
+
+const Article = ({ headline, source, byline, pub_date, url }: ArticleType) => {
+  const date = moment(pub_date);
+  const day = DAY[date.day()];
+
   return (
-    <Styled.Wrapper>
+    <Styled.Wrapper href={url} target="_self" rel="noreferrer">
       <Styled.Header>
-        <Styled.Title>국방부 “北, 화성-17 실패 만회하려 영상 짜깁기… 성공 조작”</Styled.Title>
+        <Styled.Title>{headline}</Styled.Title>
         <Icons.EmptyStar />
       </Styled.Header>
       <Styled.Footer>
         <Styled.Person>
-          <div>조선일보</div>
-          <div>김정확 기자</div>
+          <div>{source}</div>
+          <div>{byline}</div>
         </Styled.Person>
-        <Styled.PublishedAt>2021.3.15. (목)</Styled.PublishedAt>
+        <Styled.PublishedAt>{`${date.format('YYYY.MM.DD.')} (${day})`}</Styled.PublishedAt>
       </Styled.Footer>
     </Styled.Wrapper>
   );

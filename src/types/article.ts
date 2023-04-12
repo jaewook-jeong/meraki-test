@@ -3,4 +3,5 @@ export type Article = {
   source: string;
   byline: string;
   pub_date: string;
+  url: string;
 }

@@ -1,15 +1,15 @@
+import { useSelector } from 'react-redux';
 import Article from './Article';
 import * as Styled from './styled';
+import { RootState } from 'store';
 
 const Articles = () => {
+  const { articles } = useSelector((state: RootState) => state.article);
+  console.log(articles);
+
   return (
     <Styled.Wrapper>
-      <Article />
-      <Article />
-      <Article />
-      <Article />
-      <Article />
-      <Article />
+      {articles.length > 0 && articles.map((article) => <Article {...article} />)}
     </Styled.Wrapper>
   );
 };
