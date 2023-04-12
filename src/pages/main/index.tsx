@@ -1,3 +1,4 @@
+import Articles from '@/Articles';
 import Filter from '@/Filter';
 import GNB from '@/GNB';
 import Layout from '@/Layout';
@@ -6,7 +7,9 @@ const MainPage = () => {
   return (
     <>
       <Filter />
-      <Layout>Home</Layout>
+      <Layout>
+        <Articles />
+      </Layout>
       <GNB />
     </>
   );

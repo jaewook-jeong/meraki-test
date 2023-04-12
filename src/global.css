@@ -7,8 +7,10 @@
   --black-80: #6D6D6D;
   --black-100: #000000;
   --white-60: #F2F2F2;
+  --white-90: #FEFEFE;
   --white-100: #FFFFFF;
   --gray: #C4C4C4;
+  --gray-bg: #F0F1F4;
   --blue-main: #3478F6;
   --blue-sky: #82B0F4;
 }
@@ -41,4 +43,6 @@ body {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  background-color: var(--gray-bg);
+  border-radius: 30px;
 }

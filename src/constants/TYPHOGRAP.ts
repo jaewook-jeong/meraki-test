@@ -17,3 +17,15 @@ export const text16SemiBold = css`
   font-size: 16px;
   line-height: 24px;
 `;
+
+export const text18SemiBold = css`
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 28px;
+`;
+
+export const text13 = css`
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 20px;
+`;
