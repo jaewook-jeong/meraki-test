@@ -11,15 +11,19 @@ export const Wrapper = styled.section`
   border-bottom: 1px solid var(--gray);
 `;
 
-export const FilterButton = styled.button`
+export const FilterButton = styled.button<{$active: boolean}>`
   display: flex;
   flex-direction: row;
   align-items: center;
   column-gap: 4px;
-  border: 1px solid var(--gray);
+  border: 1px solid ${(props) => props.$active ? 'var(--blue-main)' : 'var(--gray)'};
   border-radius: 30px;
   padding: 6px 12px 4px;
   background-color: transparent;
   ${text14};
-  color: var(--black-80);
+  color: ${(props) => props.$active ? 'var(--blue-main)' : 'var(--black-80)'};
+
+  & > svg > path {
+    fill: ${(props) => props.$active ? 'var(--blue-main)' : 'var(--black-80)'};
+  }
 `;
