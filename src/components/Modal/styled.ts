@@ -30,7 +30,7 @@ export const ModalInner = styled.div`
   box-sizing: border-box;
   position: relative;
   background-color: #fff;
-  border-radius: 10px;
+  border-radius: 16px;
   width: 100%;
   max-width: 335px;
   top: 50%;
