@@ -38,7 +38,6 @@ export const Footer = styled.div`
 
 export const Person = styled.div`
   display: flex;
-  width: 110px;
   flex-direction: row;
   column-gap: 8px;
   ${text13};
@@ -49,6 +48,7 @@ export const Person = styled.div`
 `;
 
 export const PublishedAt = styled.div`
+  flex-shrink: 0;
   ${text13};
   color: var(--black-80);
 `;
