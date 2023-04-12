@@ -5,7 +5,6 @@ import { RootState } from 'store';
 
 const Articles = () => {
   const { articles } = useSelector((state: RootState) => state.article);
-  console.log(articles);
 
   return (
     <Styled.Wrapper>
