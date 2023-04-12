@@ -1,0 +1,1 @@
+export type Nation = 'South Korea' | 'China' | 'Japan' | 'USA' | 'North Korea' | 'Russia' | 'France' | 'UK';

@@ -1,6 +1,7 @@
 import Modal from '@/Modal';
 import * as Styled from './styled';
 import { useState } from 'react';
+import FilterForm from './Form';
 
 const Filter = () => {
   const [mount, setMount] = useState(false);
@@ -12,7 +13,7 @@ const Filter = () => {
       <Styled.FilterButton onClick={onClick}>전체 날짜</Styled.FilterButton>
       <Styled.FilterButton onClick={onClick}>전체 국가</Styled.FilterButton>
       <Modal visible={mount} onClose={onClose}>
-        <div>hello</div>
+        <FilterForm onClose={onClose} />
       </Modal>
     </Styled.Wrapper>
   );
