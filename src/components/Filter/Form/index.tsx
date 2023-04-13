@@ -40,7 +40,7 @@ const FilterForm = ({ onClose }: { onClose: () => void }) => {
   const toggleLocation = (nation: Nation) => {
     if (_nations) {
       if (_nations.includes(nation)) {
-        setNations(_nations.filter((n) => n === nation));
+        setNations(_nations.filter((n) => n !== nation));
       } else {
         setNations([..._nations, nation]);
       }
