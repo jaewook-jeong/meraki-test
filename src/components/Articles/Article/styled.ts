@@ -30,6 +30,12 @@ export const Title = styled.div`
   ${dynamicLineClamp(2)};
 `;
 
+export const ScrapButton = styled.button`
+  align-self: flex-start;
+  border: none;
+  background-color: transparent;
+`;
+
 export const Footer = styled.div`
   display: flex;
   flex-direction: row;

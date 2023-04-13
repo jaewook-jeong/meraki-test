@@ -4,6 +4,7 @@ import { RootState } from 'store';
 import { Article } from 'types/article';
 
 type RawArticle = {
+  _id: string;
   pub_date: string;
   web_url: string;
   source: string;
@@ -106,6 +107,7 @@ export const articleSlice = createSlice({
           byline: article.byline.original,
           pub_date: article.pub_date,
           url: article.web_url,
+          id: article._id,
         }));
         state.articles.push(...newArticles);
         state.currentRequestId = '';

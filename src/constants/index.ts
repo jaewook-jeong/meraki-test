@@ -1,3 +1,4 @@
 export * from './ROUTES';
 export * from './TYPHOGRAP';
-export * from './MODAL';
+export * from './SCRAP';
+export * from './NATIONAL';

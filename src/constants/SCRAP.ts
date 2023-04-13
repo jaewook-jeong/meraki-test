@@ -1,0 +1,1 @@
+export const SCRAP_KEY = 'SCRAP-NY-TIMES';

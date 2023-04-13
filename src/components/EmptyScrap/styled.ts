@@ -2,7 +2,7 @@ import { text16SemiBold, text18SemiBold } from "@constants/TYPHOGRAP";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 
-export const Wrapper = styled.section`
+export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
