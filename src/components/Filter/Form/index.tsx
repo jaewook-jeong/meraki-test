@@ -23,6 +23,7 @@ const FilterForm = ({ onClose }: { onClose: () => void }) => {
   const [_nations, setNations] = useState<Nation[]>(glocations);
 
   const onApply = () => {
+    dispatch(setInitArticlesStore());
     dispatch(
       setFilter({
         pageType: pathname as RouteType,
@@ -33,7 +34,6 @@ const FilterForm = ({ onClose }: { onClose: () => void }) => {
         },
       }),
     );
-    dispatch(setInitArticlesStore());
     onClose();
   };
 

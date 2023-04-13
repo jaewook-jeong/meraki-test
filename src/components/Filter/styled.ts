@@ -1,5 +1,6 @@
 import { text14 } from '@constants/TYPHOGRAP';
 import styled from '@emotion/styled'
+import { dynamicLineClamp } from 'utils/dynamicLineClamp';
 
 export const Wrapper = styled.section`
   display: flex;
@@ -26,4 +27,10 @@ export const FilterButton = styled.button<{$active: boolean}>`
   & > svg > path {
     fill: ${(props) => props.$active ? 'var(--blue-main)' : 'var(--black-80)'};
   }
+`;
+
+export const FilterText = styled.div`
+  ${dynamicLineClamp(1)};
+  text-align: initial;
+  max-width: 100px;
 `;

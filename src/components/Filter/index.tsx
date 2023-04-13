@@ -23,18 +23,22 @@ const Filter = () => {
     <Styled.Wrapper>
       <Styled.FilterButton onClick={onClick} $active={!!headline}>
         <Icons.Search />
-        {headline || '전체 헤드라인'}
+        <Styled.FilterText>{headline || '전체 헤드라인'}</Styled.FilterText>
       </Styled.FilterButton>
       <Styled.FilterButton onClick={onClick} $active={!!pub_date}>
         <Icons.Calendar />
-        {pub_date ? moment(pub_date).format('YYYY.MM.DD') : '전체 날짜'}
+        <Styled.FilterText>
+          {pub_date ? moment(pub_date).format('YYYY.MM.DD') : '전체 날짜'}
+        </Styled.FilterText>
       </Styled.FilterButton>
       <Styled.FilterButton onClick={onClick} $active={!!glocations?.length}>
-        {glocations && glocations?.length > 0
-          ? `${NATIONAL[glocations[0]]} ${
-              glocations.length > 1 ? `외 ${glocations.length - 1}개` : ''
-            }`
-          : '전체 국가'}
+        <Styled.FilterText>
+          {glocations && glocations?.length > 0
+            ? `${NATIONAL[glocations[0]]} ${
+                glocations.length > 1 ? `외 ${glocations.length - 1}개` : ''
+              }`
+            : '전체 국가'}
+        </Styled.FilterText>
       </Styled.FilterButton>
       <Modal visible={mount} onClose={onClose}>
         <FilterForm onClose={onClose} />
