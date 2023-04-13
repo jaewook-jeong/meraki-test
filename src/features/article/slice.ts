@@ -23,6 +23,11 @@ type ArticleState = {
   error: unknown;
   currentRequestId: string;
 }
+
+type CurrentPage = {
+  currentPage: number;
+};
+
 const initialState: ArticleState = {
   articles: [],
   currentPage: 0,
@@ -45,10 +50,10 @@ const makeLuceneQuery = ({ headline, pub_date, glocations }: FilterState) => {
   return query;
 };
 
-async function execute(filter: FilterState) {
+async function execute(filter: FilterState & CurrentPage) {
   const query = makeLuceneQuery(filter);
   const url =
-    `https://api.nytimes.com/svc/search/v2/articlesearch.json?sort=newest&api-key=d5rDty04g2bUzP11iiBiceC7QZ4SoxXw${query ? `&fq=${query}` : ''}`;
+    `https://api.nytimes.com/svc/search/v2/articlesearch.json?sort=newest&api-key=d5rDty04g2bUzP11iiBiceC7QZ4SoxXw&page=${filter.currentPage}${query ? `&fq=${query}` : ''}`;
   const options = {
     method: 'GET',
     headers: {
@@ -68,9 +73,9 @@ async function execute(filter: FilterState) {
 export const getArticles = createAsyncThunk<any, void, { state: RootState }>(
   'article/get',
   async (_, { getState }) => {
-    const { filter } = getState();
-    
-    const response = await execute(filter['/']);
+    const { filter, article } = getState();
+     
+    const response = await execute({ ...filter['/'], currentPage: article.currentPage });
     return response
   }
 )
