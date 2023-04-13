@@ -1,3 +1,4 @@
+import ROUTES from '@constants/ROUTES';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { FilterState } from 'features/filter/slice';
 import { RootState } from 'store';
@@ -50,33 +51,29 @@ const makeLuceneQuery = ({ headline, pub_date, glocations }: FilterState) => {
   return query;
 };
 
-async function execute(filter: FilterState & CurrentPage) {
-  const query = makeLuceneQuery(filter);
-  const url =
-    `https://api.nytimes.com/svc/search/v2/articlesearch.json?sort=newest&api-key=d5rDty04g2bUzP11iiBiceC7QZ4SoxXw&page=${filter.currentPage}${query ? `&fq=${query}` : ''}`;
-  const options = {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-    },
-  };
-  try {
-    const response = await fetch(url, options);
-    if (response.ok) {
-      return response.json();
-    }
-  } catch (e) {
-    console.error(e);
-  }
-}
-
 export const getArticles = createAsyncThunk<any, void, { state: RootState }>(
   'article/get',
-  async (_, { getState }) => {
+  async (_, { getState, rejectWithValue }) => {
     const { filter, article } = getState();
-     
-    const response = await execute({ ...filter['/'], currentPage: article.currentPage });
-    return response
+    try {
+      const query = makeLuceneQuery(filter[ROUTES.MAIN]);
+      const url =
+        `https://api.nytimes.com/svc/search/v2/articlesearch.json?sort=newest&api-key=d5rDty04g2bUzP11iiBiceC7QZ4SoxXw&page=${article.currentPage}${query ? `&fq=${query}` : ''}`;
+      const options = {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+        },
+      };
+      const response = await fetch(url, options);
+      if (response.ok) {
+        return response.json();
+      }
+      return rejectWithValue(response);
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+    
   }
 )
 
@@ -120,9 +117,10 @@ export const articleSlice = createSlice({
     })
     .addCase(getArticles.rejected, (state, action) => {
       const { requestId } = action.meta;
+      
       if (state.isLoading && state.currentRequestId === requestId) {
         state.isLoading = false;
-        state.error = action.error;
+        state.error = "에러가 발생했습니다. 잠시후 시도해주세요!";
         state.currentRequestId = '';
       }
     })

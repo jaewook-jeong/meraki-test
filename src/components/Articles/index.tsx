@@ -8,6 +8,7 @@ import { Article as ArticleType } from 'types/article';
 
 const Articles = () => {
   const { articles } = useSelector((state: RootState) => state.article);
+
   const [scrapedList, setScrap] = useLocalStorage<ArticleType[]>(SCRAP_KEY, []);
   const toggleScrap = ({ article, isScraped }: { article: ArticleType; isScraped: boolean }) => {
     if (isScraped) {
