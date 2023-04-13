@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -22,10 +24,24 @@
     "react-toastify": "^9.1.2"
   },
   "devDependencies": {
+    "@emotion/babel-plugin": "^11.10.6",
+    "@storybook/addon-essentials": "^7.0.4",
+    "@storybook/addon-interactions": "^7.0.4",
+    "@storybook/addon-links": "^7.0.4",
+    "@storybook/addon-styling": "^1.0.0",
+    "@storybook/blocks": "^7.0.4",
+    "@storybook/builder-vite": "^7.0.4",
+    "@storybook/react": "^7.0.4",
+    "@storybook/react-vite": "^7.0.4",
+    "@storybook/testing-library": "^0.0.14-next.2",
     "@types/react": "^18.0.28",
     "@types/react-datepicker": "^4.10.0",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^3.1.0",
+    "css-loader": "^6.7.3",
+    "prop-types": "^15.8.1",
+    "storybook": "^7.0.4",
+    "storybook-css-modules": "^1.0.8",
     "typescript": "^4.9.3",
     "vite": "^4.2.0",
     "vite-plugin-svgr": "^2.4.0",
