@@ -6,12 +6,12 @@ import { MouseEventHandler } from 'react';
 
 const DAY = ['일', '월', '화', '수', '목', '금', '토'];
 
-type Props = {
+export type Props = ArticleType & {
   isScraped: boolean;
   onClickScrap: ({ article, isScraped }: { article: ArticleType; isScraped: boolean }) => void;
 };
 
-const Article = ({ onClickScrap, isScraped, ...article }: ArticleType & Props) => {
+const Article = ({ onClickScrap, isScraped, ...article }: Props) => {
   const { headline, source, byline, pub_date, url } = article;
   const date = moment(pub_date);
   const day = DAY[date.day()];
