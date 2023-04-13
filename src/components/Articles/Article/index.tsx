@@ -8,22 +8,16 @@ const DAY = ['일', '월', '화', '수', '목', '금', '토'];
 
 type Props = {
   isScraped: boolean;
-  toggleScrap?: ({ article, isScraped }: { article: ArticleType; isScraped: boolean }) => void;
-  onDelete?: (id: string) => void;
+  onClickScrap: ({ article, isScraped }: { article: ArticleType; isScraped: boolean }) => void;
 };
 
-const Article = ({ toggleScrap, isScraped, onDelete, ...article }: ArticleType & Props) => {
+const Article = ({ onClickScrap, isScraped, ...article }: ArticleType & Props) => {
   const { headline, source, byline, pub_date, url } = article;
   const date = moment(pub_date);
   const day = DAY[date.day()];
   const onToggle: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.preventDefault();
-    if (toggleScrap) {
-      toggleScrap({ article, isScraped });
-    }
-    if (onDelete) {
-      onDelete(article.id);
-    }
+    onClickScrap({ article, isScraped });
   };
   return (
     <Styled.Wrapper href={url} target="_self" rel="noreferrer">

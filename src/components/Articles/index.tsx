@@ -23,7 +23,7 @@ const Articles = () => {
         articles.map((article) => (
           <Article
             isScraped={!!scrapedList.find((s) => s.id === article.id)}
-            toggleScrap={toggleScrap}
+            onClickScrap={toggleScrap}
             key={article.id}
             {...article}
           />

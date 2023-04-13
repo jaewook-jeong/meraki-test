@@ -34,6 +34,7 @@ export const ScrapButton = styled.button`
   align-self: flex-start;
   border: none;
   background-color: transparent;
+  cursor: pointer;
 `;
 
 export const Footer = styled.div`

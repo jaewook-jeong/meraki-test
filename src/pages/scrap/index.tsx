@@ -11,8 +11,8 @@ import { Article as ArticleType } from 'types/article';
 
 const ScrapPage = () => {
   const [scrapedList, setList] = useLocalStorage<ArticleType[]>(SCRAP_KEY, []);
-  const onDelete = (id: string) => {
-    setList(scrapedList.filter((s) => s.id !== id));
+  const onDelete = ({ article }: { article: ArticleType }) => {
+    setList(scrapedList.filter((s) => s.id !== article.id));
     toast.success('스크랩을 삭제했습니다.');
   };
   return (
@@ -22,7 +22,7 @@ const ScrapPage = () => {
         {scrapedList.length > 0 ? (
           <Wrapper>
             {scrapedList.map((s) => (
-              <Article onDelete={onDelete} isScraped {...s} />
+              <Article onClickScrap={onDelete} isScraped {...s} />
             ))}
           </Wrapper>
         ) : (
