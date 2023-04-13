@@ -1,5 +1,5 @@
 import Article from '@/Articles/Article';
-import { Wrapper } from '@/Articles/styled';
+import { Wrapper as ArticlesWrapper } from '@/Articles/styled';
 import EmptyScrap from '@/EmptyScrap';
 import Filter from '@/Filter';
 import GNB from '@/GNB';
@@ -20,11 +20,11 @@ const ScrapPage = () => {
       <Filter />
       <Layout>
         {scrapedList.length > 0 ? (
-          <Wrapper>
+          <ArticlesWrapper>
             {scrapedList.map((s) => (
               <Article onClickScrap={onDelete} isScraped {...s} />
             ))}
-          </Wrapper>
+          </ArticlesWrapper>
         ) : (
           <EmptyScrap />
         )}
